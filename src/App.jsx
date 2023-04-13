@@ -16,6 +16,7 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
+                    <Route index element={<HomePage />} />
                     <Route path="addTask" element={<AddTask tasks={tasks} setTasks={setTasks} />} />
                     <Route path="taskList" element={<TaskList tasks={tasks} setTasks={setTasks} />} />
                     <Route path="editTask/:index" element={<EditTask tasks={tasks} setTasks={setTasks} />} />

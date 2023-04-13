@@ -81,7 +81,7 @@ export default function TaskList(props) {
                     <div className="row">
                         <Link className="btn btn-primary col" to="/addTask">Add Task</Link>
                         <div className="col"></div>
-                        <select name="filter" id="filter" className="form-select col" onClick={e => {
+                        <select name="filter" id="filter" className="form-select col" onChange={e => {
                             if (e.target.value === "completed") {
                                 filterByCompleted();
                             } else if (e.target.value === "uncompleted") {
@@ -104,7 +104,7 @@ export default function TaskList(props) {
                             <option value="High">Filter by High Priority</option>
                         </select>
                         <div className="col"></div>
-                        <select name="sort" id="sort" className="form-select col" onClick={e => {
+                        <select name="sort" id="sort" className="form-select col" onChange={e => {
                             if (e.target.value === "priority") {
                                 sortByPriority();
                             } else if (e.target.value === "deadline") {
