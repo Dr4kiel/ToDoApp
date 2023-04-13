@@ -12,8 +12,6 @@ export default function TaskList(props) {
 
     const navigate = useNavigate();
 
-    sortByDefault();
-
     return (
         <div className="container">
             <div className="row">
@@ -79,6 +77,9 @@ export default function TaskList(props) {
                                     <tr key={index} className={task.completed ? "table-secondary" : task.priority === "1" ? "table-success" : task.priority === "2" ? "table-warning" : "table-danger"}>
                                         <td><input type="checkbox" name="complete" id="complete" checked={task.completed} className="form-check-input" onChange={() => {
                                             switchCompleted(searchATask(index));
+                                            sortByDefault();
+                                            document.querySelector("#sort").value = "default";
+                                            document.querySelector("#filter").value = "default";
                                         }} /></td>
                                         <td>{task.name}</td>
                                         <td>{task.description}</td>
