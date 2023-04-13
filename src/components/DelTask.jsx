@@ -1,19 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { removeTask, searchATask } from "./Task";
 
 export default function DelTask(props) {
 
     const { index } = useParams();
 
     let tasks = props.tasks;
-    let setTasks = props.setTasks;
 
     const navigate = useNavigate();
-
-    function deleteATask() {
-        tasks.splice(index, 1);
-        setTasks([...tasks]);
-        navigate("/taskList");
-    }
 
     return (
         <>
@@ -25,7 +19,10 @@ export default function DelTask(props) {
                 </div>
                 <div className="row g-3 align-items-center justify-content-evenly m-2">
                     <div className="col-auto">
-                        <button className="btn btn-danger" onClick={deleteATask}>Delete</button>
+                        <button className="btn btn-danger" onClick={() => {
+                            removeTask(searchATask(index));
+                            navigate("/taskList")
+                        }}>Delete</button>
                     </div>
                     <div className="col-auto">
                         <button className="btn btn-primary" onClick={() => {

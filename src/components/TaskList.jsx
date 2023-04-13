@@ -1,73 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {
+    searchATask, switchCompleted,
+    sortByDeadline, sortByDefault, sortByPriority,
+    filterByCompleted, filterByPriority, filterByUncompleted, noFilter
+} from "./Task";
 
 
 export default function TaskList(props) {
 
     let tasks = props.tasks;
-    let setTasks = props.setTasks;
-
-    const [originalTasks, setOriginalTasks] = useState([...tasks]);
 
     const navigate = useNavigate();
 
-    function sortByDefault() {
-        tasks.sort((task, index) => {
-            return task.completed ? 1 : -1
-        });
-        setTasks([...tasks]);
-    }
-
-    function sortByPriority() {
-        tasks.sort((task, index) => {
-            if (task.priority === index.priority) {
-                return task.completed ? 1 : -1
-            } else {
-                return index.priority - task.priority
-            }
-        });
-        setTasks([...tasks]);
-    }
-
-    function sortByDeadline() {
-        tasks.sort((task, index) => {
-            if (task.deadline === index.deadline) {
-                return task.completed ? 1 : -1
-            } else {
-                return task.deadline > index.deadline ? 1 : -1
-            }
-        });
-        setTasks([...tasks]);
-    }
-
-    function filterByCompleted() {
-        noFilter();
-        tasks = tasks.filter(task => {
-            return task.completed
-        });
-        setTasks([...tasks]);
-    }
-
-    function filterByUncompleted() {
-        noFilter();
-        tasks = tasks.filter(task => {
-            return !task.completed
-        });
-        setTasks([...tasks]);
-    }
-
-    function filterByPriority(priority) {
-        noFilter();
-        tasks = tasks.filter(task => {
-            return task.priority === priority
-        });
-        setTasks([...tasks]);
-    }
-
-    function noFilter() {
-        tasks = [...originalTasks];
-        setTasks([...tasks]);
-    }
+    sortByDefault();
 
     return (
         <div className="container">
@@ -133,8 +78,7 @@ export default function TaskList(props) {
                                 return (
                                     <tr key={index} className={task.completed ? "table-secondary" : task.priority === "1" ? "table-success" : task.priority === "2" ? "table-warning" : "table-danger"}>
                                         <td><input type="checkbox" name="complete" id="complete" checked={task.completed} className="form-check-input" onChange={() => {
-                                            tasks[index].completed = !tasks[index].completed;
-                                            setTasks([...tasks]);
+                                            switchCompleted(searchATask(index));
                                         }} /></td>
                                         <td>{task.name}</td>
                                         <td>{task.description}</td>
@@ -146,7 +90,7 @@ export default function TaskList(props) {
                                             }}>
                                                 edit
                                             </span>
-                                            <span class="material-symbols-outlined btn" width="20px" onClick={() => {
+                                            <span className="material-symbols-outlined btn" width="20px" onClick={() => {
                                                 navigate('/deleteTask/' + index);
                                             }}>
                                                 remove

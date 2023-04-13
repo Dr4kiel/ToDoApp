@@ -1,8 +1,9 @@
-export default function AddTask(props) {
+import { useNavigate } from "react-router-dom";
+import { addTask } from "./Task";
 
-    let tasks = props.tasks;
+export default function AddTask() {
 
-    let setTasks = props.setTasks;
+    const navigate = useNavigate();
 
     const appendATask = () => {
         let taskName = document.getElementById("taskNameInput").value;
@@ -18,12 +19,14 @@ export default function AddTask(props) {
             completed: false
         }
 
-        setTasks([...tasks, newTask]);
+        addTask(newTask);
 
         document.getElementById("taskNameInput").value = "";
         document.getElementById("taskDescriptionInput").value = "";
         document.getElementById("taskDeadlineInput").value = "";
         document.getElementById("taskPriorityInput").value = "1";
+
+        navigate("/taskList");
     }
 
 

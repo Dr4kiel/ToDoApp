@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { searchATask, updateTask } from "./Task";
 
 export default function EditTask(props) {
 
     let tasks = props.tasks;
     const { index } = useParams();
-    let setTasks = props.setTasks;
 
     const navigate = useNavigate();
 
@@ -22,8 +22,7 @@ export default function EditTask(props) {
             completed: false
         }
 
-        tasks[index] = newTask;
-        setTasks([...tasks]);
+        updateTask(searchATask(index), newTask);
 
         navigate("/taskList");
     }
