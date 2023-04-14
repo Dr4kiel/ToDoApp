@@ -88,7 +88,7 @@ export const filterByUncompleted = () => {
 
 export const filterByPriority = (priority) => {
     noFilter();
-    TaskStore.tasks.filter(task => task.priority == priority);
+    TaskStore.tasks = TaskStore.tasks.filter(task => task.priority == priority);
 }
 
 export const noFilter = () => {
