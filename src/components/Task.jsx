@@ -2,13 +2,6 @@ import { proxy } from "valtio";
 
 
 let initTasks = [
-    {
-        name: "Task 1",
-        description: "taskDescription",
-        deadline: "0000-00-00",
-        priority: "2",
-        completed: false
-    }
 ];
 
 export const TaskStore = proxy({
